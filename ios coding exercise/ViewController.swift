@@ -19,7 +19,6 @@ class ViewController: UITableViewController {
     }
     
     func fetchJSON () {
-        //let url = "https://restcountries-v1.p.mashape.com/all"
         let todoEndpoint: String = "https://restcountries-v1.p.mashape.com/all"
         guard let url = URL(string: todoEndpoint) else {
             print("Error: cannot create URL")
@@ -97,6 +96,10 @@ class ViewController: UITableViewController {
             cell.textLabel?.text = name
     
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
