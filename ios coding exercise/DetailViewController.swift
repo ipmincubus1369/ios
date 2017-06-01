@@ -9,10 +9,13 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    var detailItem: String!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        guard detailItem != nil else { return }
+        //if let body = detailItem {
+            self.title = detailItem
+        //}
         // Do any additional setup after loading the view.
     }
 
