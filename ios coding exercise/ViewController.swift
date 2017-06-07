@@ -8,7 +8,7 @@
 
 import UIKit
 import Foundation
-
+import MapKit
 
 class ViewController: UITableViewController {
     
@@ -16,7 +16,9 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         CountryManager.shared().fetchJSON{ () in
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -26,8 +28,11 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let name = CountryManager.shared().countryList[indexPath.row]
-            cell.textLabel?.text = name
+        let country = CountryManager.shared().countryList[indexPath.row]
+        if let countryName: String = country.name {
+            cell.textLabel?.text = countryName
+        }
+        
         return cell
     }
     

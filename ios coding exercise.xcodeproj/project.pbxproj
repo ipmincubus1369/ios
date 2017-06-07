@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A43DD73A1EE5AA2B002096D9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A43DD7391EE5AA2B002096D9 /* MapKit.framework */; };
 		A442877F1ECC0F0900541805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A442877E1ECC0F0900541805 /* AppDelegate.swift */; };
 		A44287811ECC0F0900541805 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44287801ECC0F0900541805 /* ViewController.swift */; };
 		A44287841ECC0F0900541805 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44287821ECC0F0900541805 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A43DD7391EE5AA2B002096D9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A442877B1ECC0F0900541805 /* ios coding exercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios coding exercise.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A442877E1ECC0F0900541805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44287801ECC0F0900541805 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,17 +37,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A43DD73A1EE5AA2B002096D9 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A43DD7381EE5AA2B002096D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A43DD7391EE5AA2B002096D9 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A44287721ECC0F0800541805 = {
 			isa = PBXGroup;
 			children = (
 				A442877D1ECC0F0900541805 /* ios coding exercise */,
 				A442877C1ECC0F0900541805 /* Products */,
+				A43DD7381EE5AA2B002096D9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +119,11 @@
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = 525G4H7U84;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

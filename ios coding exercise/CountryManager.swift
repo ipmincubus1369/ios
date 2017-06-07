@@ -16,11 +16,11 @@ class CountryManager {
         return cm
     }()
     
-    var countryList: [String]
-    
+    var countryList: [Country]
+        
     // Initialization
     private init() {
-        self.countryList = [String]()
+        self.countryList = [Country]()
     }
     
     func fetchJSON (completionClosure: @escaping () -> ()) {
@@ -54,11 +54,7 @@ class CountryManager {
                     guard let obj = object as? [String: Any] else {
                         return
                     }
-                    guard let name = obj["name"] as? String else {
-                        return
-                    }
-                    self.countryList.append(name)
-                    Country(json: obj)
+                    self.countryList.append(Country(json: obj)!)
                 }
             }
             completionClosure()

@@ -7,15 +7,54 @@
 //
 
 import UIKit
+import MapKit
+
+class countryLocation: NSObject, MKAnnotation {
+    var title: String?
+    var coordinate: CLLocationCoordinate2D
+    
+    init(title: String, coordinate: CLLocationCoordinate2D) {
+        self.title = title
+        self.coordinate = coordinate
+    }
+}
 
 class DetailViewController: UIViewController {
-    var detailItem: String!
+    var detailItem: Country!
+    
+    override func loadView() {
+        super.loadView()
+        
+        let mapview = MKMapView()
+        mapview.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(mapview)
+        
+        mapview.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        mapview.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        mapview.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0.0).isActive = true
+        mapview.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor).isActive = true
+ 
+
+        addPinAndCenter(mapview: mapview)
+        
+    }
+    
+    func addPinAndCenter(mapview: MKMapView) {
+        if (detailItem.name != nil && detailItem.latlng != nil && detailItem.latlng!.first != nil && detailItem.latlng!.last != nil) {
+            let mapCenter = CLLocationCoordinate2DMake(detailItem.latlng!.first!, detailItem.latlng!.last!)
+            let center = countryLocation(title: detailItem.name!, coordinate: CLLocationCoordinate2D(latitude: detailItem.latlng!.first!, longitude: detailItem.latlng!.last!))
+            mapview.addAnnotation(center)
+            let span = MKCoordinateSpanMake(30, 30)
+            let region = MKCoordinateRegionMake(mapCenter, span)
+            mapview.region = region
+        }
+    }
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard detailItem != nil else { return }
-        //if let body = detailItem {
-            self.title = detailItem
-        //}
+        self.title = detailItem.name
         // Do any additional setup after loading the view.
     }
 
