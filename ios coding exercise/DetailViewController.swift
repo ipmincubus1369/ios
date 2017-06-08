@@ -9,15 +9,6 @@
 import UIKit
 import MapKit
 
-class countryLocation: NSObject, MKAnnotation {
-    var title: String?
-    var coordinate: CLLocationCoordinate2D
-    
-    init(title: String, coordinate: CLLocationCoordinate2D) {
-        self.title = title
-        self.coordinate = coordinate
-    }
-}
 
 class DetailViewController: UIViewController {
     var detailItem: Country!
@@ -42,7 +33,7 @@ class DetailViewController: UIViewController {
     func addPinAndCenter(mapview: MKMapView) {
         if (detailItem.latlng.first != nil && detailItem.latlng.last != nil) {
             let mapCenter = CLLocationCoordinate2DMake(detailItem.latlng.first!, detailItem.latlng.last!)
-            let center = countryLocation(title: detailItem.name, coordinate: CLLocationCoordinate2D(latitude: detailItem.latlng.first!, longitude: detailItem.latlng.last!))
+            let center = CountryAnnotation(title: detailItem.name, coordinate: CLLocationCoordinate2D(latitude: detailItem.latlng.first!, longitude: detailItem.latlng.last!))
             mapview.addAnnotation(center)
             let span = MKCoordinateSpanMake(30, 30)
             let region = MKCoordinateRegionMake(mapCenter, span)
