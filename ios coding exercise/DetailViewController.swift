@@ -24,6 +24,7 @@ class DetailViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        self.title = detailItem?.name
         
         let mapview = MKMapView()
         mapview.translatesAutoresizingMaskIntoConstraints = false
@@ -33,16 +34,15 @@ class DetailViewController: UIViewController {
         mapview.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         mapview.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0.0).isActive = true
         mapview.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor).isActive = true
- 
 
         addPinAndCenter(mapview: mapview)
         
     }
     
     func addPinAndCenter(mapview: MKMapView) {
-        if (detailItem.name != nil && detailItem.latlng != nil && detailItem.latlng!.first != nil && detailItem.latlng!.last != nil) {
-            let mapCenter = CLLocationCoordinate2DMake(detailItem.latlng!.first!, detailItem.latlng!.last!)
-            let center = countryLocation(title: detailItem.name!, coordinate: CLLocationCoordinate2D(latitude: detailItem.latlng!.first!, longitude: detailItem.latlng!.last!))
+        if (detailItem.latlng.first != nil && detailItem.latlng.last != nil) {
+            let mapCenter = CLLocationCoordinate2DMake(detailItem.latlng.first!, detailItem.latlng.last!)
+            let center = countryLocation(title: detailItem.name, coordinate: CLLocationCoordinate2D(latitude: detailItem.latlng.first!, longitude: detailItem.latlng.last!))
             mapview.addAnnotation(center)
             let span = MKCoordinateSpanMake(30, 30)
             let region = MKCoordinateRegionMake(mapCenter, span)
@@ -53,8 +53,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard detailItem != nil else { return }
-        self.title = detailItem.name
         // Do any additional setup after loading the view.
     }
 

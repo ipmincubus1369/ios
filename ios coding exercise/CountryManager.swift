@@ -54,7 +54,11 @@ class CountryManager {
                     guard let obj = object as? [String: Any] else {
                         return
                     }
-                    self.countryList.append(Country(json: obj)!)
+                    let country = Country(json: obj)
+                    if (country != nil) {
+                        self.countryList.append(country!)
+                    }
+                    
                 }
             }
             completionClosure()

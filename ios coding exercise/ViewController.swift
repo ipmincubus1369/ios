@@ -29,9 +29,9 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let country = CountryManager.shared().countryList[indexPath.row]
-        if let countryName: String = country.name {
-            cell.textLabel?.text = countryName
-        }
+//        if let countryName: String = country.name {
+            cell.textLabel?.text = country.name
+        //}
         
         return cell
     }

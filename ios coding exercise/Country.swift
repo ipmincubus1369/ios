@@ -10,21 +10,16 @@ import Foundation
 
 struct Country {
     
-    let name: String?
-    //let location: (latitude: Double, longitude: Double)
-    //let topLevelDomain: [String]
-    //let alpha2Code: String
-    //let alpha3Code: String
-    //let callingCodes: [String]
+    let name: String
     let capital: String?
     let population: Int?
-    let latlng: [Double]?
+    let latlng: [Double]
 
 
     init?(json: [String: Any]) {
         guard let name = json["name"] as? String else {return nil}
-        guard let capital = json["capital"] as? String else {return nil}
-        guard let population = json["population"] as? Int else {return nil}
+        let capital = json["capital"] as? String
+        let population = json["population"] as? Int
         guard let latlng = json["latlng"] as? [Double] else {return nil}
         
         self.name = name
