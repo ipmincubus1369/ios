@@ -15,7 +15,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        CountryManager.shared().fetchJSON{ () in
+        CountryManager.shared().fetchJSON{
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }

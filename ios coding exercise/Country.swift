@@ -14,6 +14,7 @@ struct Country {
     let capital: String?
     let population: Int?
     let latlng: [Double]
+    let area: Int
 
 
     init?(json: [String: Any]) {
@@ -26,6 +27,7 @@ struct Country {
         self.capital = capital
         self.population = population
         self.latlng = latlng
+        self.area = (json["area"] as? Int) ?? 60000
         
     }
     

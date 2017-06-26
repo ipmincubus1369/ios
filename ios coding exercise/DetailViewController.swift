@@ -12,10 +12,11 @@ import MapKit
 
 class DetailViewController: UIViewController {
     var detailItem: Country!
+    var areaSpan = CLLocationDegrees(30)
     
     override func loadView() {
         super.loadView()
-        self.title = detailItem?.name
+        self.title = detailItem!.name
         
         let mapview = MKMapView()
         mapview.translatesAutoresizingMaskIntoConstraints = false
@@ -33,15 +34,30 @@ class DetailViewController: UIViewController {
     func addPinAndCenter(mapview: MKMapView) {
         if (detailItem.latlng.first != nil && detailItem.latlng.last != nil) {
             let mapCenter = CLLocationCoordinate2DMake(detailItem.latlng.first!, detailItem.latlng.last!)
-            let center = CountryAnnotation(title: detailItem.name, coordinate: CLLocationCoordinate2D(latitude: detailItem.latlng.first!, longitude: detailItem.latlng.last!))
+            let center = CountryAnnotation(title: detailItem.name, coordinate: mapCenter)
             mapview.addAnnotation(center)
-            let span = MKCoordinateSpanMake(30, 30)
+            setAreaSpan()
+            let span = MKCoordinateSpanMake(areaSpan, areaSpan)
             let region = MKCoordinateRegionMake(mapCenter, span)
             mapview.region = region
         }
     }
-  
     
+    func setAreaSpan () {
+        switch detailItem.area {
+        case 1..<10000:
+            areaSpan = CLLocationDegrees(2)
+        case 10000..<30000:
+            areaSpan = CLLocationDegrees(20)
+        case 30000..<40000:
+            areaSpan = CLLocationDegrees(30)
+        case 40000..<70000:
+            areaSpan = CLLocationDegrees(40)
+        default:
+            areaSpan = CLLocationDegrees(55)
+        }
+    }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

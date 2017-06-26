@@ -24,7 +24,7 @@ class CountryManager {
     }
     
     func fetchJSON (completionClosure: @escaping () -> ()) {
-        let todoEndpoint: String = "https://restcountries-v1.p.mashape.com/all"
+        let todoEndpoint = "https://restcountries-v1.p.mashape.com/all"
         guard let url = URL(string: todoEndpoint) else {
             print("Error: cannot create URL")
             return
@@ -60,6 +60,9 @@ class CountryManager {
                     }
                     
                 }
+            } else {
+                print("Can not serialize json object")
+                return
             }
             completionClosure()
         }
