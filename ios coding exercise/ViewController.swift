@@ -12,9 +12,13 @@ import MapKit
 
 class ViewController: UITableViewController {
     
+    var tableViewController: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "myCell")
+        
         CountryManager.shared().fetchJSON{
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -22,18 +26,15 @@ class ViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CountryManager.shared().countryList.count
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        let country = CountryManager.shared().countryList[indexPath.row]
+        cell.textLabel?.text = country.name
+        return cell
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let country = CountryManager.shared().countryList[indexPath.row]
-//        if let countryName: String = country.name {
-            cell.textLabel?.text = country.name
-        //}
-        
-        return cell
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return CountryManager.shared().countryList.count
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -42,7 +43,7 @@ class ViewController: UITableViewController {
         vc.detailItem = CountryManager.shared().countryList[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
